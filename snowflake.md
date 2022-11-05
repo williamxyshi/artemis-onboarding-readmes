@@ -5,7 +5,8 @@ copy and paste the following script into a snowflake worksheet and execute all l
 	
 	begin;
 
-	   -- create variables for user / password / role / warehouse / 		database (needs to be uppercase for objects)
+	   -- create variables for user / password / role / warehouse / 		
+	   -- database (needs to be uppercase for objects)
 	   set role_name = 'ARTEMIS_ROLE';
 	   set user_name = 'ARTEMIS_USER';
 	   set user_password = 'password123';
