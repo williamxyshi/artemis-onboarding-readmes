@@ -63,7 +63,7 @@ copy and paste the following script into a snowflake worksheet and execute all l
 To connect Artemis to an existing snowflake warehouse, replace the `warehouse_name` string with the name of your warehouse. 
 
 <br>
-<h3> Step 2: Add network policy
+### Step 2: Add network policy
 If you have an existing network policy execute the following command after replacing <your_network_policy_name>
 `ALTER NETWORK POLICY <your_network_policy_name> SET {[ALLOWED_IP_LIST] = ('35.227.135.0/29', '35.234.176.144/29')]};`
 
