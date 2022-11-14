@@ -14,3 +14,6 @@ Copy down the Server Hostname, Port and HTTP Path strings.
 
 Enter the required values into the form, and test connection.
 
+Host - url to your workspace, ex: adb-3243212182xxxx.x.azuredatabricks.net 
+SQL Path - path to your cluster, ex: sql/protocolv1/o/324321218256145/0822-190749-xxxxxxxx
+Personal Access Token - ex: dapi9f2f0dbd05aef88xxxxxxxxxxxxx-x

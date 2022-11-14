@@ -78,3 +78,7 @@ If you do not have an existing network policy or would like to create a new one,
 ### Step 3: Complete Artemis setup
 fill in the required fields with the values used in the script. 
 
+host - account string thats made up of id, region and provier, ex: zu9xxxx.canada-central.azure
+database - DATABASE_NAME created by script, ex: ARTEMIS_DATABASE
+username - user_name created by script: ex: ARTEMIS_USER
+passwrod - password created by script: ex: password123
