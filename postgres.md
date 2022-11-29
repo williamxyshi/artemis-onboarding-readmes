@@ -2,7 +2,9 @@
 
 ### Step 1: Network Security Config
 
-Ensure your Postgres database 
+Ensure your Postgres database has neccessary network access given to the following ip addresses:
+
+    '20.237.100.50', '20.94.35.248/29', '3.239.194.48/29', '3.99.193.224/29', '35.234.176.144/29'
 
 ### Step 2: Retrieve Connection Details
 
