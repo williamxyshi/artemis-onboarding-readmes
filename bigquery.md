@@ -1,3 +1,11 @@
-## Sorry!!
+# Connect to Big Query
 
-### BigQuery isn't a supported destination just yet! We're working hard to push it out. Click the button to make us work harder
+###
+### Step 1: Create Google Service Account
+### 
+To connect to your warehouse, Artemis requires a Google service account. For more information, see Google's Creating a service account documentation.
+
+
+
+
+	  
