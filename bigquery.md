@@ -8,9 +8,10 @@ Locate the project you want to connect's ID from the Google Cloud Consoles proje
 ###
 ### Step 2: Create Google Service Account
 ### 
-To connect to your warehouse, Artemis requires a Google service account. For more information, see Google's [Creating a service account documentation](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating).
+To connect to your warehouse, Artemis requires a Google service account. Create it from the "Service Accounts" page under "IAM and Admin", and assign the service account the "BigQuery User" role. For more information, see Google's: [Creating a service account documentation](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating).
 
-After generating a service account, create a private key. For more information, see Google's [private key documentation](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating).
+
+After generating a service account, create a private key. For more information, see Google's: [Creating a private key documentation](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating).
 
 The Private Key file should look something like the example below. Paste the entire thing ({} and all) into the Service Account field.
 
