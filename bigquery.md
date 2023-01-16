@@ -8,11 +8,11 @@ Locate the project you want to connect's ID from the Google Cloud Consoles proje
 ###
 ### Step 2: Create Google Service Account
 ### 
-To connect to your warehouse, Artemis requires a Google service account. For more information, see Google's Creating a service account documentation.
-After generating a service account, create a private key. For more information, see Google's private key documentation.
-Once you have your private key, paste the entire string into the input box. 
+To connect to your warehouse, Artemis requires a Google service account. For more information, see Google's [Creating a service account documentation](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating).
 
-Copy the entire .json file into the input box
+After generating a service account, create a private key. For more information, see Google's [private key documentation](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating).
+
+The Private Key file should look something like the example below. Paste the entire thing ({} and all) into the Service Account field.
 
 
 	{
@@ -28,6 +28,20 @@ Copy the entire .json file into the input box
 	  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/artemis%40apt-bonbon-51234.iam.gserviceaccount.com"
 	}
 
+###
+### Step 3: Configure Service Account
+### 
 
+Go to the IAM & Admin page and click "+add".
 
+Enter the client_email from your generated private key (ex: "sample@apt-bonbon-51234.iam.gserviceaccount.com") in the "New Principals" Field
+
+Choose "BigQuery User" as the Role
+
+###
+### Step 3: Complete Artemis Setup
+### 
+Navigate back to the Artemis App Page, and enter your project ID from Step 1 into the "Project ID" field 
+
+Copy and paste the contents of the entire service account principal key file into the Service Account field
 	  
