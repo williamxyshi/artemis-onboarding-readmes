@@ -14,7 +14,7 @@ This contains the host, port and database of your Redshift cluster.
 ### Step 2: Configure Redshift cluster
 ### 
 
-[SSH Only] Skip this step.
+[SSH Only] Add a custom SSH rule instead of TCP rule in your bastion host.
 
 From the cluster "Properties" tab, locate "VPC security group" in the "Network and Security" section and click on it. 
 
@@ -22,7 +22,7 @@ From within the "VPC security group", click on the "Inbound Rules" tab and click
 
 Add a new custom TCP rule with your Redshift port number, and the following IP addresses:
 	
-	 20.228.195.55
+	 20.228.195.55, 20.237.100.50
 
 ###
 ### [SSH Only] Step 3: Configure bastion server
