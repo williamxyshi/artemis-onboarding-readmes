@@ -22,7 +22,7 @@ From within the "VPC security group", click on the "Inbound Rules" tab and click
 
 Add a new custom TCP rule with your Redshift port number, and the following IP addresses:
 	
-	 20.228.195.55, 20.237.100.50
+	 20.237.100.50
 
 ###
 ### [SSH Only] Step 3: Configure bastion server
