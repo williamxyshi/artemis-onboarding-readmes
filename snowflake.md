@@ -17,12 +17,12 @@ desired password for the Artemis user.
 
 	set user_password = '<ENTER_PASSWORD_HERE>';
 	
-	set user_name = 'artemis_data_user';
-	set role_name = 'artemis_data_role';
-	set warehouse_name = 'artemis_data_warehouse';
-	set artemis_database_name = 'artemis_data_database';
-	set artemis_schema_name = 'artemis_data_schema';
-	set storage_integration_name = 'artemis_data_storage_integration';
+	set user_name = 'ARTEMIS_DATA_USER';
+	set role_name = 'ARTEMIS_DATA_ROLE';
+	set warehouse_name = 'ARTEMIS_DATA_WAREHOUSE';
+	set artemis_database_name = 'ARTEMIS_DATA_DATABASE';
+	set artemis_schema_name = 'ARTEMIS_DATA_SCHEMA';
+	set storage_integration_name = 'ARTEMIS_DATA_STORAGE_INTEGRATION';
 	
 	use role accountadmin;
 	
@@ -149,9 +149,6 @@ desired password for the Artemis user.
 ###
 ### Step 3: Complete Artemis setup
 ###
-Fill in the required fields with the values used in the script. If you have changed any of the default values when executing the script, be sure to update the default field values as well.
-
-#### host - account string thats made up of id, region and provier, ex: zu9xxxx.canada-central.azure
-#### database - DATABASE_NAME created by script, ex: ARTEMIS_DATABASE
-#### username - user_name created by script: ex: ARTEMIS_USER
-#### password - password created by script: ex: password123
+Enter your snowflake account identifier in the account field.
+Enter the chosen Artemis user password in the password field.
+If you changed any of the default values when executing the script, be sure to update the default field values as well.
