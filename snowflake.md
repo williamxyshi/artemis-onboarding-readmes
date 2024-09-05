@@ -1,7 +1,22 @@
 # Connect to Snowflake
 
 ###
-### Step 1: Run Script in Snowflake warehouse
+### Step 1: Add network policy
+###
+Whitelist Artemis IP Address 
+    
+    20.237.100.50
+
+If you have an existing network policy execute the following command after replacing <your_network_policy_name>
+
+    ALTER NETWORK POLICY <your_network_policy_name> SET {[ALLOWED_IP_LIST] = ('20.237.100.50')]};
+
+If you do not have an existing network policy or would like to create a new one, execute the following command after replacing <your_network_policy_name>
+
+    CREATE NETWORK POLICY <artemis_ip_whitelist> ALLOWED_IP_LIST = ('20.237.100.50');
+
+###
+### Step 2: Run Script in Snowflake warehouse
 ### 
 copy and paste the following script into a snowflake worksheet and execute all lines. 
 
@@ -62,18 +77,6 @@ copy and paste the following script into a snowflake worksheet and execute all l
 
 	  commit;
 
-To connect Artemis to an existing snowflake warehouse, replace the `warehouse_name` string with the name of your warehouse. 
-
-###
-### Step 2: Add network policy
-###
-If you have an existing network policy execute the following command after replacing <your_network_policy_name>
-
-    ALTER NETWORK POLICY <your_network_policy_name> SET {[ALLOWED_IP_LIST] = ('20.237.100.50', '20.228.195.55', '10.244.0.71', '35.227.135.0/29', '35.234.176.144/29')]};
-
-If you do not have an existing network policy or would like to create a new one, execute the following command after replacing <your_network_policy_name>
-
-    CREATE NETWORK POLICY <artemis_ip_whitelist> ALLOWED_IP_LIST = ('20.237.100.50', '20.228.195.55', '10.244.0.71', '35.227.135.0/29', '35.234.176.144/29');
 
 ###
 ### Step 3: Complete Artemis setup
