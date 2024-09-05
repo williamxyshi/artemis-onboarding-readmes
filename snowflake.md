@@ -138,7 +138,7 @@ desired password for the Artemis user.
 ###
 ### Step 2: Add network policy
 ###
-If you have a network policy that blocks IP addresses, you will need to add the Artemis IP address to your allowed IP list <mark>20.237.100.50</mark>.\
+If you have a network policy that blocks IP addresses, you will need to add the Artemis IP address to your allowed IP list 20.237.100.50\
 If you would like to create a new network policy for Artemis, run the following commands.
 
 	CREATE NETWORK RULE IF NOT EXISTS allow_artemis_data_access_rule
