@@ -40,12 +40,13 @@ desired password for the Artemis user.
 	-- create a util database for Artemis
 	create database if not exists identifier($artemis_database_name);
 	grant USAGE on database identifier($artemis_database_name) to role identifier($role_name);
+
+ 	use database identifier($artemis_database_name);
 	
 	-- create a util schema for Artemis
 	create schema if not exists identifier($artemis_schema_name);
 	grant USAGE, CREATE STAGE on schema identifier($artemis_schema_name) to role identifier($role_name);
 	
-	use database identifier($artemis_database_name);
 	use schema identifier($artemis_schema_name);
 	
 	-- create a storage integration for Artemis
