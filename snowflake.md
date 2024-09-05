@@ -1,5 +1,3 @@
-# Connect to Snowflake
-
 ###
 ### Step 1: Add network policy
 ###
