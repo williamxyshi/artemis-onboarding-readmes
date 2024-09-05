@@ -1,22 +1,12 @@
 ###
-### Step 1: Add network policy
-###
-If you have an existing network policy execute the following command after replacing <your_network_policy_name>
-
-    ALTER NETWORK POLICY <your_network_policy_name> SET {[ALLOWED_IP_LIST] = ('20.237.100.50')]};
-
-If you do not have an existing network policy or would like to create a new one, execute the following command after replacing <your_network_policy_name>
-
-    CREATE NETWORK POLICY <artemis_ip_whitelist> ALLOWED_IP_LIST = ('20.237.100.50');
-
-###
-### Step 2: Create a user and storage integration for Artemis with a limited set of permissions.
+### Step 1: Create a user and storage integration for Artemis with a limited set of permissions.
 ### 
 Copy and paste the following script into a snowflake worksheet and execute all lines. Replace <ENTER_PASSWORD_HERE> with your 
 desired password for the Artemis user.
 
 	set user_password = '<ENTER_PASSWORD_HERE>';
-	
+
+ 	-- note the following variable values must be in uppercase
 	set user_name = 'ARTEMIS_DATA_USER';
 	set role_name = 'ARTEMIS_DATA_ROLE';
 	set warehouse_name = 'ARTEMIS_DATA_WAREHOUSE';
@@ -145,10 +135,23 @@ desired password for the Artemis user.
 	$$;
 	CALL grant_usage_to_role($role_name);
 
+###
+### Step 2: Add network policy
+###
+If you have a network policy that blocks IP addresses, you will need to add the Artemis IP address to your allowed IP list `20.237.100.50`.\
+If you would like to create a new network policy for Artemis, run the following commands.
+
+	CREATE NETWORK RULE IF NOT EXISTS allow_artemis_data_access_rule
+	    MODE = INGRESS
+	    TYPE = IPV4
+	    VALUE_LIST = ('20.237.100.50');
+	CREATE NETWORK POLICY IF NOT EXISTS artemis_data_network_policy
+	  ALLOWED_NETWORK_RULE_LIST = ('allow_artemis_access_rule');
+	ALTER USER ARTEMIS_DATA_USER SET network_policy = artemis_data_network_policy;
 
 ###
 ### Step 3: Complete Artemis setup
 ###
-Enter your snowflake account identifier in the account field.
-Enter the chosen Artemis user password in the password field.
+Enter your snowflake account identifier in the account field.\
+Enter the chosen Artemis user password in the password field.\
 If you changed any of the default values when executing the script, be sure to update the default field values as well.
