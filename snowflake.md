@@ -151,7 +151,15 @@ If you would like to create a new network policy for Artemis, run the following 
 	ALTER USER ARTEMIS_DATA_USER SET network_policy = artemis_data_network_policy;
 
 ###
-### Step 3: Complete Artemis setup
+### (Optional) Step 3: Set RSA public key
+###
+If you are using key pair auth, copy the public key from the connection page.
+Run the following command replacing <COPIED PUBLIC KEY HERE> with the copied public key.
+
+	ALTER USER ARTEMIS_DATA_USER SET RSA_PUBLIC_KEY='<COPIED PUBLIC KEY HERE>'
+
+###
+### Step 4: Complete Artemis setup
 ###
 Enter your snowflake account identifier in the account field.\
 Enter the chosen Artemis user password in the password field.\
