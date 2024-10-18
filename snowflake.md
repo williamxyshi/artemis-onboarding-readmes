@@ -137,7 +137,7 @@ desired password for the Artemis user.
 	CALL grant_usage_to_role($role_name);
 
 ###
-### Step 2: Add network policy
+### (Optional) Step 2: Add network policy
 ###
 If you have a network policy that blocks IP addresses, you will need to add the Artemis IP address to your allowed IP list 20.237.100.50\
 If you would like to create a new network policy for Artemis, run the following commands.
