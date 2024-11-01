@@ -135,6 +135,28 @@ desired password for the Artemis user.
 	    return 'Usage/References privileges granted to role ' + ROLE_NAME + ' for all databases/shemas/tables/views.';
 	$$;
 	CALL grant_usage_to_role($role_name);
+	 -- Create a stored procedure for Artemis to retrieve clustering information for tables
+	CREATE OR REPLACE PROCEDURE get_clustering_information(
+	    table_identifier STRING,
+	    column_list ARRAY DEFAULT NULL
+	)
+	RETURNS VARIANT
+	LANGUAGE JAVASCRIPT
+	EXECUTE AS OWNER
+	AS
+	$$
+	    var query
+	    if (COLUMN_LIST?.length > 0) {
+	        const cluster_columns = COLUMN_LIST.join(', ')
+	        query = `SELECT SYSTEM$CLUSTERING_INFORMATION('${TABLE_IDENTIFIER}', '(${cluster_columns})')`
+	    } else {
+	        query = `SELECT SYSTEM$CLUSTERING_INFORMATION('${TABLE_IDENTIFIER}')`
+	    }
+	    const result_set = snowflake.execute({sqlText: query});
+	    result_set.next()
+	    return JSON.parse(result_set.getColumnValue(1))
+	$$;
+	GRANT USAGE ON PROCEDURE GET_CLUSTERING_INFORMATION(STRING, ARRAY) TO ROLE identifier($role_name)
 
 ###
 ### (Optional) Step 2: Add network policy
