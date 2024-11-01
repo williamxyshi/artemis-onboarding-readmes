@@ -135,6 +135,7 @@ desired password for the Artemis user.
 	    return 'Usage/References privileges granted to role ' + ROLE_NAME + ' for all databases/shemas/tables/views.';
 	$$;
 	CALL grant_usage_to_role($role_name);
+
 	 -- Create a stored procedure for Artemis to retrieve clustering information for tables
 	CREATE OR REPLACE PROCEDURE get_clustering_information(
 	    table_identifier STRING,
