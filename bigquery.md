@@ -19,7 +19,7 @@ If you have configured your Domain Restricted Sharing policy to limit access bas
 
 ## Step 3: Assign Metadata IAM Roles
 
-Copy the service account email generated in Step 1. For every google cloud project with BigQuery enabled, assign the following roles to the Artemis service account.
+Copy the service account email generated in Step 1. Assign the following roles to the Artemis service account at the organization level. Alternatively you can assign these roles at the project level to limit BigQuery access to select projects.
 
 - bigquery.metadataViewer
 - bigquery.resourceViewer
@@ -27,13 +27,12 @@ Copy the service account email generated in Step 1. For every google cloud proje
 
 Note the above roles only permit Artemis to view the structure of objects and BigQuery workloads. They do not allow Artemis to view any data stored within objects.
 
-1. In the google cloud console, select the project running BigQuery from the dropdown in the top left
+1. In the google cloud console, select your organization from the dropdown in the top left
 2. Go to IAM from the navigation menu
 3. Click **GRANT ACCESS**
 4. Enter the copied service account email as the principal
 5. Add the 3 roles listed above
 6. Click **SAVE**
-7. Repeat the above steps for each project running BigQuery
 
 ## Step 4: Enable Billing Export
 
