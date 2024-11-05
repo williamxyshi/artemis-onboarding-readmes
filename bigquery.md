@@ -1,48 +1,71 @@
 # Connect to Big Query
 
-###
-### Step 1: Locate Project ID
-### 
-Locate the project you want to connect's ID from the Google Cloud Consoles project list.
+## Step 1: Generate Service Account
 
-###
-### Step 2: Create Google Service Account
-### 
-To connect to your warehouse, Artemis requires a Google service account. Create it from the "Service Accounts" page under "IAM and Admin", and assign the service account the "BigQuery User" role. For more information, see Google's: [Creating a service account documentation](https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating).
+Generate an Artemis managed service account for your organization by clicking the **Generate Service Account** button on the warehouse connection onboarding page.
 
+## Step 2: (Optional) Update Domain Restricted Sharing Policy
 
-After generating a service account, create a private key. For more information, see Google's: [Creating a private key documentation](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating).
+If you have configured your Domain Restricted Sharing policy to limit access based on organization ID, you will need to add the Artemis organization resource ID to the list of allowed values. This will allow you to add the Artemis service account to IAM policies in your organization.
 
-The Private Key file should look something like the example below. Paste the entire thing ({} and all) into the Service Account field.
+1. In the google cloud console, navigate to the **Organization Policies**
+2. Select **Domain Restricted Sharing** from ****the list of constraints.
+3. Click **Manage Policy**
+4. Click on your existing **Allow** rule
+5. Click **ADD VALUE**
+6. Enter the Artemis organization resource ID in the value field: **principalSet://iam.googleapis.com/organizations/996999934235**
+7. Click **Done**
+8. Click **SET POLICY**
 
+## Step 3: Assign Metadata IAM Roles
 
-	{
-	  "type": "service_account",
-	  "project_id": "apt-bonbon-51234",
-	  "private_key_id": "e84142131231241a0925a60e512341242ca2",
-	  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDSa2WOz5JB6HB+\nnlZCp63cmaEXQDbKtUKUnjSfCW3Srp/JRcObhbzmg3I3MBquzPHy0Hz/t/OyJd1x\n6zsbwu3e0+ov2xIZgc7CK9XQ6sSrxUHcJcpTt7QgpU1exZS4NDJTaF9pXfjJp+3B\nnW1GYiuWyYUhcsDpluaiDRbP6Sw27H8BiRJMnZWF/F9gTVgRRNHILgRfbk5ASCd1\nr3nwLrGyAWWf+tTLx3SyxnGVpUJt4Zslh8MW2sA481eVG/OfPk2XBMgR7vhvPIJZ\nBjBDQBfRTRT5pl5aruXmojkOTH1FaB4gA0I3v+Y5hng95G/TF7J62WpDzo8FndR9\nCEojB1VzAgMBAAECggEANuMKx7i/Vu/RwEV/DL3+bQep7I20fSXQ60FlSoLEIeup\nBHBtOLkm8B4jgd/LZgNRrVvS70VFjRexbtDER1aOg8xVTwxe6UZh72ZNzMQgbwny\nRwGYiEPn+YgE6Y6yX2ZGJlmYYbzAcalksdjgalYgE6Y6yX2ZGJlmYYbzAcalksdjgalYgE6Y6yX2ZGJlmYYbzAcalksdjgalYgE6Y6yX2ZGJlmYYbzAcalksdjgal;kdglk;asjdfakl;jsdfklasjf;lkjs;lkajdlf0htQN2RCB/TqFuDtFQXiOC1hRd+yhTJwhZF2H9Znp1y+G\nSKSOQlT1aJ3oiogJy9Dnzq215+OEh9uN0Qy6aHC3EkTT4Y3qUu24wwPKElOY+wup\nkNIRvW2eAQoDnYEKqBBxHYrZs09EmlEBxXreOL0CgYEA9GBNlKDo3ZOwB1fQz6Ar\nSe29VdFs/N2D/nf4ZNSAOvJA5rkIIj1yFv3QTg4Pyr4u0ZVaQ6fluvuqCSQlmTjL\nAf/iD+e4d+wIaJiZzL6RV/Q8WufGVT0Cv6WLmcOcR3W4vewNjorD19wUImGQfUWt\nsNzgx4otw3bY8lyYppU6b+0=\n-----END PRIVATE KEY-----\n",
-	  "client_email": "sample@apt-bonbon-51234.iam.gserviceaccount.com",
-	  "client_id": "wfsasdfaee2f",
-	  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-	  "token_uri": "https://oauth2.googleapis.com/token",
-	  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-	  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/artemis%40apt-bonbon-51234.iam.gserviceaccount.com"
-	}
+Copy the service account email generated is Step 1. For every google cloud project with BigQuery enabled, assign the following roles to the Artemis service account.
 
-###
-### Step 3: Configure Service Account
-### 
+- bigquery.metadataViewer
+- bigquery.resourceViewer
+- bigquery.jobUser
 
-Go to the IAM & Admin page and click "+add".
+Note the above roles only permit Artemis to view the structure of objects and BigQuery workloads. They do not allow Artemis to view any data stored within objects.
 
-Enter the client_email from your generated private key (ex: "sample@apt-bonbon-51234.iam.gserviceaccount.com") in the "New Principals" Field
+1. In the google cloud console, select the project running BigQuery from the dropdown in the top left
+2. Go to IAM from the navigation menu
+3. Click **GRANT ACCESS**
+4. Enter the copied service account email as the principal
+5. Add the 3 roles listed above
+6. Click **SAVE**
+7. Repeat the above steps for each project running BigQuery
 
-Choose "BigQuery User" as the Role
+## Step 4: Enable Billing Export
 
-###
-### Step 3: Complete Artemis Setup
-### 
-Navigate back to the Artemis App Page, and enter your project ID from Step 1 into the "Project ID" field 
+If you do not have Standard Usage Cost and Pricing billing exports enabled on your billing account used for BigQuery, you will need to enable both. Note that the exported tables can take up to 48 hours to be created. We recommend exporting to a multi-region BigQuery dataset to guarantee that the billing tables include data from the past month. Documentation for enabling billing exports can be found here: https://cloud.google.com/billing/docs/how-to/export-data-bigquery-setup.
 
-Copy and paste the contents of the entire service account principal key file into the Service Account field
+## Step 5: Assign Read Access To Billing Export Tables
+
+Assign the following role to the Artemis service account on the exported standard usage cost and pricing tables. This will allow Artemis to read the contents of both tables and retrieve your BigQuery usage and pricing data.
+
+- **roles/bigquery.dataViewer**
+
+The exported tables use the following naming scheme:
+
+- **gcp_billing_export_v1_BILLING_ACCOUNT_ID**
+- **cloud_pricing_export**
+
+For each table:
+
+1. In the google cloud console, select the project where you have chosen to export your billing table from the dropdown in the top left
+2. Go to BigQuery from the navigation menu
+3. Click on the table name from the resource viewer on the left
+4. Click the **SHARE** button in the table header
+5. Click **ADD PRINCIPAL**
+6. Enter the Artemis service account email as the principal
+7. Add the **BigQuery Data Viewer** role
+8. Click **SAVE**
+
+## Step 6: Enter Billing Export Information In Form
+
+Fill in the fields in the warehouse connection form with your billing export information. Note the billing account id has the format XXXXXX-XXXXXX-XXXXXX. Refer to this guide for getting your billing account id https://cloud.google.com/billing/docs/how-to/find-billing-account-id.
+
+## Step 7: Click Confirm and Test
+
+Click **Confirm and Test**. Note this can take a few minutes. You may receive a message stating you need to enable additional google cloud APIs. If you do, simply follow the link and click **ENABLE** and try again.
 	  
