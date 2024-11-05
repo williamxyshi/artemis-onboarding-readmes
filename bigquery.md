@@ -1,4 +1,4 @@
-# Connect to Big Query
+# Connect to BigQuery
 
 ## Step 1: Generate Service Account
 
