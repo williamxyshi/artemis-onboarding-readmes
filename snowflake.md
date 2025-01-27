@@ -171,7 +171,7 @@ If you would like to create a new network policy for Artemis, run the following 
 	    VALUE_LIST = ('20.237.100.50');
 	CREATE NETWORK POLICY IF NOT EXISTS artemis_data_network_policy
 	  ALLOWED_NETWORK_RULE_LIST = ('allow_artemis_access_rule');
-	ALTER USER ARTEMIS_DATA_USER SET network_policy = artemis_data_network_policy;
+	ALTER USER ARTEMIS_DATA_USER SET network_policy = allow_artemis_data_access_rule;
 
 ###
 ### (Optional) Step 3: Set RSA public key
