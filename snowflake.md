@@ -96,12 +96,12 @@ desired password for the Artemis user.
 	
 	    while (result_set.next()) {
 	        var database_name = result_set.getColumnValue(2);
-	        var origin = result_set.getColumnValue(5);
+		var kind = result_set.getColumnValue(10);
 	
-	        // Skip imported databases
-	        if (origin != null && origin.trim() !== '') {
-	            continue;
-	        }
+		// Skip non-standard databases
+		if (kind !== 'STANDARD') {
+		    continue;
+		}
 	
 	        var sql_command1 = `GRANT USAGE ON DATABASE ${database_name} TO ROLE ${ROLE_NAME};`
 	        var grant_statement1 = snowflake.createStatement( {sqlText: sql_command1} );
